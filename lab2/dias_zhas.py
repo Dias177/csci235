@@ -54,7 +54,7 @@ def runge_kutta5( F, x, h) :
 
    return x + h * (   ( 7.0 / 90.0 ) * k1 + ( 32.0 / 90.0 ) * k3 + ( 12.0 / 90.0 ) * k4 + ( 32.0 / 90.0 ) * k5 + ( 7.0 / 90.0 ) * k6 )
 
-def approx( h = 1.0E-1 ) :
+def approx( h = 4.0E-3 ) :
    print( "testing Runge-Kutta methods on the catenary" )
 
    x0 = 0.0
@@ -71,10 +71,10 @@ def approx( h = 1.0E-1 ) :
       return array( [ p[1], mu * sqrt( 1.0 + p[1] * p[1] ) ] )
 
    while x + h < x1 :
-      p = runge_kutta1( cat, p, h )
+      p = runge_kutta41( cat, p, h )
       x += h
 
-   p = runge_kutta1( cat, p, x1 - x )
+   p = runge_kutta41( cat, p, x1 - x )
    x = x1
 
    print( "h = ", h )
@@ -333,4 +333,29 @@ def table():
     print(" Euler ", " "*4,"|", approx1(), " "*8, "|", approx12(), " "*8, "|", approx13())
     print(" Heun ", " " * 5, "|", approx2(), " |", approx22(), " |", approx23())
     print(" Runge-Kutta", "|", approx3(), " |", approx32(), " |", approx33())
+# 1) Time was tested on the Euler method with h = 0.001:
+# C++
+# real 0m0.005s
+# user 0m0.002s
+# sys 0m0.002s
 #
+# python
+# n = 100, t = 0.01277 s
+
+# 2) Time was tested on the Heun method with h = 0.002:
+# C++
+# real 0m0.005s
+# user 0m0.002s
+# sys 0m0.002s
+#
+# python
+# n = 100, t = 0.01398 s
+
+# 3) Time was tested on the Runge-Kutta method with h = 0.004:
+# C++
+# real 0m0.005s
+# user 0m0.002s
+# sys 0m0.002s
+
+# python
+# n = 100, t = 0.01297 s

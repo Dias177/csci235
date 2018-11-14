@@ -154,7 +154,7 @@ inline std::ostream& operator << ( std::ostream& stream, const pair& p )
 int main( int argc, char * argv [ ] )
 {
 
-   double h = 1.0E-3;
+   double h = 4.0E-3;
 
    double x0 = 0.0;
    double x1 = 1.0;
@@ -172,11 +172,11 @@ int main( int argc, char * argv [ ] )
  
    while( x + h < x1 )
    {
-      p = runge_kutta1( p, cat, h );
+      p = runge_kutta41( p, cat, h );
       x = x + h;
    }
 
-   p = runge_kutta1( p, cat, x1 - x );
+   p = runge_kutta41( p, cat, x1 - x );
    x = x1;
 
    std::cout << "h = " << h << "\n";
