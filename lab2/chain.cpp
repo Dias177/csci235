@@ -172,7 +172,7 @@ int main( int argc, char * argv [ ] )
  
    while( x + h < x1 )
    {
-      p = runge_kutta1( p, cat, h ); 
+      p = runge_kutta1( p, cat, h );
       x = x + h;
    }
 
