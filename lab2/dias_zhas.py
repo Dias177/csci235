@@ -1,7 +1,6 @@
 
 from scipy import *
 from scipy.linalg import *
-import timeit
 
 # runge_kutta1 is Euler's method:
 
