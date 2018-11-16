@@ -85,7 +85,7 @@ def approx( h = 4.0E-3 ) :
 
    print( "error = ", error )
 
-def approx1( h = 1.0E-3 ) :
+def approx1( h ) :
 
    x0 = 0.0
    x1 = 1.0
@@ -112,61 +112,8 @@ def approx1( h = 1.0E-3 ) :
 
    return error
 
-def approx12( h = 2.0E-3 ) :
 
-   x0 = 0.0
-   x1 = 1.0
-
-   mu = 2.0
-
-   s0 = array( [ 1.0 / mu, 0.0 ] )
-
-   p = s0
-   x = x0
-
-   def cat( p ) :
-      return array( [ p[1], mu * sqrt( 1.0 + p[1] * p[1] ) ] )
-
-   while x + h < x1 :
-      p = runge_kutta1( cat, p, h )
-      x += h
-
-   p = runge_kutta1( cat, p, x1 - x )
-   x = x1
-
-   expected = array( [ cosh( mu * x1 ) / mu, sinh( mu * x1 ) ] )
-   error = p - expected
-
-   return error
-
-def approx13( h = 4.0E-3 ) :
-
-   x0 = 0.0
-   x1 = 1.0
-
-   mu = 2.0
-
-   s0 = array( [ 1.0 / mu, 0.0 ] )
-
-   p = s0
-   x = x0
-
-   def cat( p ) :
-      return array( [ p[1], mu * sqrt( 1.0 + p[1] * p[1] ) ] )
-
-   while x + h < x1 :
-      p = runge_kutta1( cat, p, h )
-      x += h
-
-   p = runge_kutta1( cat, p, x1 - x )
-   x = x1
-
-   expected = array( [ cosh( mu * x1 ) / mu, sinh( mu * x1 ) ] )
-   error = p - expected
-
-   return error
-
-def approx2( h = 1.0E-3 ) :
+def approx2( h ) :
 
    x0 = 0.0
    x1 = 1.0
@@ -193,61 +140,8 @@ def approx2( h = 1.0E-3 ) :
 
    return error
 
-def approx22( h = 2.0E-3 ) :
 
-   x0 = 0.0
-   x1 = 1.0
-
-   mu = 2.0
-
-   s0 = array( [ 1.0 / mu, 0.0 ] )
-
-   p = s0
-   x = x0
-
-   def cat( p ) :
-      return array( [ p[1], mu * sqrt( 1.0 + p[1] * p[1] ) ] )
-
-   while x + h < x1 :
-      p = runge_kutta21( cat, p, h )
-      x += h
-
-   p = runge_kutta21( cat, p, x1 - x )
-   x = x1
-
-   expected = array( [ cosh( mu * x1 ) / mu, sinh( mu * x1 ) ] )
-   error = p - expected
-
-   return error
-
-def approx23( h = 4.0E-3 ) :
-
-   x0 = 0.0
-   x1 = 1.0
-
-   mu = 2.0
-
-   s0 = array( [ 1.0 / mu, 0.0 ] )
-
-   p = s0
-   x = x0
-
-   def cat( p ) :
-      return array( [ p[1], mu * sqrt( 1.0 + p[1] * p[1] ) ] )
-
-   while x + h < x1 :
-      p = runge_kutta21( cat, p, h )
-      x += h
-
-   p = runge_kutta21( cat, p, x1 - x )
-   x = x1
-
-   expected = array( [ cosh( mu * x1 ) / mu, sinh( mu * x1 ) ] )
-   error = p - expected
-
-   return error
-
-def approx3( h = 1.0E-3 ) :
+def approx3( h ) :
 
    x0 = 0.0
    x1 = 1.0
@@ -274,88 +168,55 @@ def approx3( h = 1.0E-3 ) :
 
    return error
 
-def approx32( h = 2.0E-3 ) :
-
-   x0 = 0.0
-   x1 = 1.0
-
-   mu = 2.0
-
-   s0 = array( [ 1.0 / mu, 0.0 ] )
-
-   p = s0
-   x = x0
-
-   def cat( p ) :
-      return array( [ p[1], mu * sqrt( 1.0 + p[1] * p[1] ) ] )
-
-   while x + h < x1 :
-      p = runge_kutta41( cat, p, h )
-      x += h
-
-   p = runge_kutta41( cat, p, x1 - x )
-   x = x1
-
-   expected = array( [ cosh( mu * x1 ) / mu, sinh( mu * x1 ) ] )
-   error = p - expected
-
-   return error
-
-def approx33( h = 4.0E-3 ) :
-
-   x0 = 0.0
-   x1 = 1.0
-
-   mu = 2.0
-
-   s0 = array( [ 1.0 / mu, 0.0 ] )
-
-   p = s0
-   x = x0
-
-   def cat( p ) :
-      return array( [ p[1], mu * sqrt( 1.0 + p[1] * p[1] ) ] )
-
-   while x + h < x1 :
-      p = runge_kutta41( cat, p, h )
-      x += h
-
-   p = runge_kutta41( cat, p, x1 - x )
-   x = x1
-
-   expected = array( [ cosh( mu * x1 ) / mu, sinh( mu * x1 ) ] )
-   error = p - expected
-
-   return error
 
 def table():
     print(" Value of h  | 0.001", " " * 27, " | 0.002", " " * 27, " | 0.004")
-    print(" Euler ", " "*4,"|", approx1(), " "*8, "|", approx12(), " "*8, "|", approx13())
-    print(" Heun ", " " * 5, "|", approx2(), " |", approx22(), " |", approx23())
-    print(" Runge-Kutta", "|", approx3(), " |", approx32(), " |", approx33())
+    print(" Euler ", " "*4,"|", approx1(0.001), " "*8, "|", approx1(0.002), " "*8, "|", approx1(0.004))
+    print(" Heun ", " " * 5, "|", approx2(0.001), " |", approx2(0.002), " |", approx2(0.004))
+    print(" Runge-Kutta", "|", approx3(0.001), " |", approx3(0.002), " |", approx3(0.004))
 # 1) Time was tested on the Euler method with h = 0.001:
 # C++
-# real 0m0.005s
+# real 0m0.004s
 # user 0m0.002s
 # sys 0m0.002s
 #
 # python
 # n = 100, t = 0.01277 s
 
+# C++ is faster in 3.2 times than python
+
 # 2) Time was tested on the Heun method with h = 0.002:
 # C++
-# real 0m0.005s
+# real 0m0.004s
 # user 0m0.002s
 # sys 0m0.002s
 #
 # python
 # n = 100, t = 0.01398 s
 
+# C++ is faster in 3.5 times than python
+
 # 3) Time was tested on the Runge-Kutta method with h = 0.004:
 # C++
-# real 0m0.005s
+# real 0m0.004s
 # user 0m0.002s
 # sys 0m0.002s
 
 # python
 # n = 100, t = 0.01297 s
+
+# C++ is faster in 3.2 times than python
+
+# 4) Time was tested on the Runge-Kutta method with h = 0.001:
+# C++
+# real 0m0.004s
+# user 0m0.002s
+# sys 0m0.002s
+
+# python
+# n = 100, t = 0.0495s
+
+# C++ is faster in 12.4 times than python
+
+# Thus, it can be concluded that C++ is much faster than python and the significant difference
+# starts to appear when we use more complex methods with the small value of h.
