@@ -35,7 +35,7 @@ class Rational(Number):
         if self.denum == 1:
             return "{}".format(self.num)
 
-        return "{} / {}".format(self.num, self.denum)
+        return "{}/{}".format(self.num,self.denum)
 
     def __neg__(self):
         self.num *= -1
