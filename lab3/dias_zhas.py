@@ -22,7 +22,7 @@ def tests():
     print("m1*m2\n{}".format(m1@m2))
 
     m3 = m1.inverse()
-    print("inverse of m1, matrix m2\n{}".format(m3))
+    print("inverse of m1, matrix m3\n{}".format(m3))
 
     mm1 = (m1@m2)@m3 - m1@(m2@m3)
     print("(m1*m2)*m3 - m1*(m2*m3)\n{}".format(mm1))
@@ -34,11 +34,11 @@ def tests():
     print("(m1+m2)*m3 - m1*m3 - m2*m3\n{}".format(mm3))
 
     v = Vector(1,1)
-    mm4 = m1@(m2(v)) - (m1@m2)(v)
+    mm4 = m1(m2(v)) - (m1@m2)(v)
     print("m1(m2(v)) - (m1*m2)(v)\n{}".format(mm4))
 
-    mm5 = m1.determinant()*m2.determinant() - (m1*m2).determinant()
+    mm5 = m1.determinant()*m2.determinant() - (m1@m2).determinant()
     print("det(m1)*det(m2) - det(m1*m2)\n{}".format(mm5))
 
-    print("m1*inv(m1)\n{}".format(m1*m3))
-    print("inv(m1)*m1\n{}".format(m3*m1))
+    print("m1*inv(m1)\n{}".format(m1@m3))
+    print("inv(m1)*m1\n{}".format(m3@m1))

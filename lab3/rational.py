@@ -38,8 +38,7 @@ class Rational(Number):
         return "{}/{}".format(self.num,self.denum)
 
     def __neg__(self):
-        self.num *= -1
-        return self
+        return Rational(-self.num, self.denum)
 
     def __add__(self, other):
         if isinstance(other, str):
